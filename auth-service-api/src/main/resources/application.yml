@@ -1,0 +1,17 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/proyecto2
+    username: postgres
+    password: 1234
+  jpa:
+    hibernate:
+      ddl-auto: update
+jwt:
+  secret: errggt3tl3t3j0gij94j5g9d8AVA76vb87v67v8bV6B9GBR98G9G304GNj0rgj409g4gh349gj309gj4trtpomrtmhrtergegrhtr
+springdoc:
+  api-docs:
+    path: /v1/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
