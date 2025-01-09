@@ -1,8 +1,8 @@
 package com.example.auth_service_api.config;
 
+import com.example.auth_service_api.repository.UserRepository;
 import com.example.auth_service_api.services.interfaces.IJwtService;
-import com.example.users_service_api.repository.UserRepository;
-import commons.UserModel;
+import com.example.common_library.entity.UserModel;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,6 +20,7 @@ import java.util.Optional;
 public class JwtAuthFilter extends OncePerRequestFilter {
     private final IJwtService jwtService;
     private final UserRepository userRepository;
+
 
     public JwtAuthFilter(IJwtService jwtService, UserRepository userRepository) {
         this.jwtService = jwtService;

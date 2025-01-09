@@ -1,12 +1,12 @@
 package com.example.games_service_api.controllers.gameControllersInterface;
 
 import com.example.games_service_api.common.entities.models.GameModel;
-import commons.apiPathConstants;
+import com.example.games_service_api.constants.apiGamePathConstant;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping(apiPathConstants.V1_ROUTE + apiPathConstants.GAME_ROUTE)
+@RequestMapping(apiGamePathConstant.V1_ROUTE + apiGamePathConstant.GAME_ROUTE)
 @SecurityRequirement(name = "Bearer Authentication")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public interface IGameApi{

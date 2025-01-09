@@ -1,13 +1,13 @@
 package com.example.users_service_api.controllers.Interface;
 
+import com.example.common_library.entity.UserModel;
+import com.example.users_service_api.constants.apiUserPathConstant;
 import com.example.users_service_api.dtos.UpdateInfoRequest;
-import commons.UserModel;
-import commons.apiPathConstants;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping(apiPathConstants.V1_ROUTE + apiPathConstants.USER_ROUTE)
+@RequestMapping(apiUserPathConstant.V1_ROUTE + apiUserPathConstant.USER_ROUTE)
 @SecurityRequirement(name = "Bearer Authentication")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public interface IUserController {
