@@ -3,8 +3,9 @@ package com.example.auth_service_api.controllers.interfaces;
 import com.example.auth_service_api.constants.apiAuthPathConstant;
 import com.example.auth_service_api.dtos.LoginRequest;
 import com.example.auth_service_api.dtos.TokenResponse;
-import com.example.users_service_api.dtos.UserRequest;
 
+
+import com.example.auth_service_api.dtos.UserRequest;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

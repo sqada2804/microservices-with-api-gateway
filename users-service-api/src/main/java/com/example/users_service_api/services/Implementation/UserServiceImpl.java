@@ -1,6 +1,5 @@
 package com.example.users_service_api.services.Implementation;
 
-
 import com.example.common_library.entity.UserModel;
 import com.example.users_service_api.dtos.UpdateInfoRequest;
 import com.example.users_service_api.repository.UserRepository;
@@ -24,7 +23,7 @@ public class UserServiceImpl implements IUserService {
                 .map(this::getUser)
                 .map(existingUser -> updateFieldsUser(existingUser, userRequest))
                 .map(userRepository::save)
-                .orElseThrow(() -> new RuntimeException("Couldn´t update game"));
+                .orElseThrow(() -> new RuntimeException("Couldn´t update user"));
     }
 
     private UserModel updateFieldsUser(UserModel existingUser, UpdateInfoRequest userModel) {

@@ -3,8 +3,8 @@ package com.example.auth_service_api.controllers.implementations;
 import com.example.auth_service_api.controllers.interfaces.IAuthApi;
 import com.example.auth_service_api.dtos.LoginRequest;
 import com.example.auth_service_api.dtos.TokenResponse;
+import com.example.auth_service_api.dtos.UserRequest;
 import com.example.auth_service_api.services.interfaces.IAuthService;
-import com.example.users_service_api.dtos.UserRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
