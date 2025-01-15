@@ -30,8 +30,8 @@ public class UserController implements IUserController {
     }
 
     @Override
-    public ResponseEntity<Void> deleteUser(Long gameId) {
-        userService.deleteUser(gameId);
+    public ResponseEntity<Void> deleteUser(Long userId) {
+        userService.deleteUser(userId);
         return ResponseEntity.noContent().build();
     }
 }

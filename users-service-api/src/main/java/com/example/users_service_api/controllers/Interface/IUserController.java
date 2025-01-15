@@ -8,15 +8,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping(apiUserPathConstant.V1_ROUTE + apiUserPathConstant.USER_ROUTE)
-@SecurityRequirement(name = "Bearer Authentication")
+@SecurityRequirement(name = "Bearer Token")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public interface IUserController {
-        @GetMapping(value = "/getUser/{userId}")
+        @GetMapping(value = "/getUser")
         ResponseEntity<UserModel> getUser(@RequestHeader("X-User-Id") Long userId);
 
-        @PutMapping(value = "/updateUser/{userId}")
+        @PutMapping(value = "/updateUser")
         ResponseEntity<Void> updateUser(@RequestBody UpdateInfoRequest userRequest, @RequestHeader("X-User-Id") Long userId);
 
-        @DeleteMapping(value = "/deleteUser/{userId}")
+        @DeleteMapping(value = "/deleteUser")
         ResponseEntity<Void> deleteUser(@RequestHeader("X-User-Id") Long userId);
 }

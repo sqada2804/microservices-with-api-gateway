@@ -41,6 +41,9 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
+
+
+
     private void processAuthentication(HttpServletRequest request, UserModel userDetails) {
         String jwtToken = request.getHeader("Authentication").substring(7);
         Optional.of(jwtToken)

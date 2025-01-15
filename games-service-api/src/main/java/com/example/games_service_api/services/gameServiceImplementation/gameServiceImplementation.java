@@ -18,7 +18,7 @@ public class gameServiceImplementation implements IGameService {
     }
 
     public GameModel createGame(GameModel gameRequest) {
-        return Optional.of(gameRequest).
+        return Optional.ofNullable(gameRequest).
                 map(this::mapToEntity).
                 map(gameRepository::save).
                 orElseThrow(() -> new RuntimeException("Error creating game"));

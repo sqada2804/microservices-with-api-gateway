@@ -17,6 +17,5 @@ public class GameModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long gameId;
-
     private String name;
 }

@@ -18,12 +18,17 @@ public interface IGameApi{
 
     @GetMapping(value = "/getGame/{gameId}")
     ResponseEntity<GameModel> getGame(
-            @RequestHeader("X-User-Id") Long gameId
+            @PathVariable("gameId") Long gameId,
+            @RequestHeader("X-User-Id") Long userId
     );
 
     @PutMapping(value = "/updateGame/{gameId}")
-    ResponseEntity<Void> updateGame(@RequestBody GameModel gameRequest, @RequestHeader("X-User-Id") Long gameId);
+    ResponseEntity<Void> updateGame(@RequestBody GameModel gameRequest,
+                                    @PathVariable("gameId") Long gameId,
+                                    @RequestHeader("X-User-Id") Long userId);
 
     @DeleteMapping(value = "/deleteGame/{gameId}")
-    ResponseEntity<Void> deleteGame(@RequestHeader("X-User-Id") Long gameId);
+    ResponseEntity<Void> deleteGame(
+            @PathVariable("gameId") Long gameId,
+            @RequestHeader("X-User-Id") Long userId);
 }
