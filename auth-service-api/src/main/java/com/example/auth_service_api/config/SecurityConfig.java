@@ -31,12 +31,8 @@ public class SecurityConfig {
         httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
-                .authorizeHttpRequests(request -> request.requestMatchers("/v1/**", "/swagger-ui/**", "/swagger-ui.html")
+                .authorizeHttpRequests(request -> request.requestMatchers("/v1/**", "/swagger-ui/**", "/swagger-ui.html", "/v1/auth/**")
                         .permitAll()
-                        .requestMatchers("/v1/user/**")
-                        .authenticated()
-                        .requestMatchers("/v1/game/**")
-                        .authenticated()
                         .anyRequest()
                         .authenticated())
                 .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

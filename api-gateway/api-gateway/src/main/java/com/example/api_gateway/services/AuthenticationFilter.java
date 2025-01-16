@@ -1,5 +1,7 @@
 package com.example.api_gateway.services;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.http.HttpHeaders;
@@ -13,6 +15,7 @@ import reactor.core.publisher.Mono;
 @Component
 public class AuthenticationFilter extends AbstractGatewayFilterFactory<AuthenticationFilter.Config> {
 
+    private static final Logger log = LogManager.getLogger(AuthenticationFilter.class);
     private final RouterValidator validator;
     private final JwtUtils jwtUtils;
 
@@ -44,7 +47,7 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
                 }
                 serverHttpRequest = exchange.getRequest()
                         .mutate()
-                        .header("userIdRequest", jwtUtils.extractUserId(authHeader).toString())
+                        .header("X-User-Id", jwtUtils.extractUserId(authHeader).toString())
                         .build();
             }
             return chain.filter(exchange.mutate().request(serverHttpRequest).build());
@@ -60,7 +63,6 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
     private boolean authMissing(ServerHttpRequest request) {
         return !request.getHeaders().containsKey("Authorization");
     }
-
 
     public static class Config {
         public Config() {
