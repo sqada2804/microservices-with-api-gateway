@@ -1,4 +1,4 @@
-package com.example.users_service_api.constants;
+package com.example.users_service_api.commons.dtos.constants;
 
 public class apiUserPathConstant {
     public static final String V1_ROUTE = "/v1";

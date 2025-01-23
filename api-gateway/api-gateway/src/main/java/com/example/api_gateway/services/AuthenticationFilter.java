@@ -36,7 +36,9 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
                 if(authMissing(request)) {
                     return onError(exchange, HttpStatus.UNAUTHORIZED);
                 }
-                String authHeader = exchange.getRequest().getHeaders().get(HttpHeaders.AUTHORIZATION).get(0);
+
+                String authHeader = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
+
                 if(authHeader != null && authHeader.startsWith("Bearer ")){
                     authHeader = authHeader.substring(7);
                 } else {

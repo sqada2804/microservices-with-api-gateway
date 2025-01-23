@@ -1,19 +1,16 @@
-package com.example.users_service_api.dtos;
+package com.example.games_service_api.common.entities.models.dtos;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 @Builder
-public class UpdateInfoRequest {
+public class GameRequest {
     @NotNull
-    private String email;
+    private Long gameId;
     @NotNull
     private String name;
-    @NotNull
-    private String password;
 }
-
