@@ -14,7 +14,7 @@ public class JwtUtils {
         return Jwts.parserBuilder()
                 .setSigningKey(secretKey)
                 .build()
-                .parseClaimsJwt(token)
+                .parseClaimsJws(token)
                 .getBody();
     }
 
@@ -22,14 +22,14 @@ public class JwtUtils {
         try {
             return getClaims(token).getExpiration().before(new Date());
         } catch(Exception e){
-            return true;
+            return false;
         }
     }
 
     public Integer extractUserId(String token){
         try {
             return Integer.parseInt(getClaims(token).getSubject());
-        } catch(Exception e) {
+        }catch(NullPointerException e){
             return null;
         }
     }

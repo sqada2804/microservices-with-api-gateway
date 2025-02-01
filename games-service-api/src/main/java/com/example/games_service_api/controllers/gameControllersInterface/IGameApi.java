@@ -11,27 +11,26 @@ import org.springframework.web.bind.annotation.*;
 @SecurityRequirement(name = "Bearer Authentication")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public interface IGameApi{
-
-    @PostMapping(value = "/createGame")
+    @PostMapping(value = "/create")
     ResponseEntity<GameModel> createGame(
         @RequestBody GameRequest gameRequest,
         @RequestHeader("X-User-Id") String userId
     );
 
-    @GetMapping(value = "/getGame/{gameId}")
+    @GetMapping(value = "/get/{gameId}")
     ResponseEntity<GameModel> getGame(
-            @PathVariable("gameId") Long gameId,
-            @RequestHeader("X-User-Id") String userId
+            @RequestHeader("X-User-Id") String userId,
+            @PathVariable Long gameId
     );
 
-    @PutMapping(value = "/updateGame/{gameId}")
+    @PutMapping(value = "/update/{gameId}")
     ResponseEntity<Void> updateGame(@RequestBody GameRequest gameRequest,
-                                    @PathVariable("gameId") Long gameId,
-                                    @RequestHeader("X-User-Id") String userId);
+                                    @RequestHeader("X-User-Id") String userId,
+                                    @PathVariable Long gameId);
 
-
-    @DeleteMapping(value = "/deleteGame/{gameId}")
+    @DeleteMapping(value = "/delete/{gameId}")
     ResponseEntity<Void> deleteGame(
-            @PathVariable("gameId") Long gameId,
-            @RequestHeader("X-User-Id") String userId);
+            @RequestHeader("X-User-Id") String userId,
+            @PathVariable Long gameId
+    );
 }

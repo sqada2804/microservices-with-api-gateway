@@ -10,7 +10,5 @@ import lombok.*;
 @Builder
 public class GameRequest {
     @NotNull
-    private Long gameId;
-    @NotNull
     private String name;
 }

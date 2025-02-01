@@ -17,23 +17,24 @@ public class gameControllers implements IGameApi {
 
     @Override
     public ResponseEntity<GameModel> createGame(GameRequest gameRequest, String userId) {
-        return ResponseEntity.ok(gameService.createGame(gameRequest));
+        return ResponseEntity.ok(gameService.createGame(gameRequest, userId));
     }
 
     @Override
-    public ResponseEntity<GameModel> getGame(Long gameId, String userId) {
-        return ResponseEntity.ok(gameService.getGame(gameId));
+    public ResponseEntity<GameModel> getGame(String userId, Long gameId) {
+        return ResponseEntity.ok(gameService.getGame(userId, gameId));
     }
 
+
     @Override
-    public ResponseEntity<Void> updateGame(GameRequest gameRequest, Long gameId, String userId) {
-        gameService.updateGame(gameRequest, gameId);
+    public ResponseEntity<Void> updateGame(GameRequest gameRequest, String userId, Long gameId) {
+        gameService.updateGame(gameRequest, userId, gameId);
         return ResponseEntity.noContent().build();
     }
 
     @Override
-    public ResponseEntity<Void> deleteGame(Long gameId, String userId) {
-        gameService.deleteGame(gameId);
+    public ResponseEntity<Void> deleteGame(String userId, Long gameId) {
+        gameService.deleteGame(userId, gameId);
         return ResponseEntity.noContent().build();
     }
 

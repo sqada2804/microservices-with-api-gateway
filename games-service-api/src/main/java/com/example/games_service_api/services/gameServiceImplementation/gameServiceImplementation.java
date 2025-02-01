@@ -18,42 +18,49 @@ public class gameServiceImplementation implements IGameService {
         this.gameRepository = gameRepository;
     }
 
-    public GameModel createGame(GameRequest gameRequest) {
-        return Optional.ofNullable(gameRequest).
-                map(this::mapToEntity).
+    public GameModel createGame(GameRequest gameRequest, String userId) {
+        return Optional.of(gameRequest).
+                map(game -> mapToEntity(game, userId)).
                 map(gameRepository::save).
                 orElseThrow(() -> new RuntimeException("Error creating game"));
     }
 
 
     @Override
-    public GameModel getGame(Long gameId) {
-        return Optional.of(gameId).flatMap(gameRepository::findById)
+    public GameModel getGame(String userId, Long gameId) {
+        return Optional.of(userId).flatMap(userId1 -> gameRepository.findGameByUserIdAndGameId(userId, gameId))
                 .orElseThrow(() -> new RuntimeException("Error finding game by id"));
     }
 
+
     @Override
-    public void updateGame(GameRequest gameRequest, Long gameId) {
-            Optional.of(gameId)
-                .map(this::getGame)
-                .map(existingGame -> updateFieldsGame(existingGame, gameRequest))
+    public void updateGame(GameRequest gameRequest, String userId, Long gameId) {
+        gameRepository.findGameByUserIdAndGameId(userId, gameId)
+                .map(gameExists -> {
+                    System.out.println("Game found: " + gameExists);
+                    return updateFieldsGame(gameExists, gameRequest);
+                })
                 .map(gameRepository::save)
-                .orElseThrow(() -> new RuntimeException("Error couldn´t update game"));
+                .orElseThrow(() -> new RuntimeException("Error updating Game Fields"));
     }
 
-    private GameModel updateFieldsGame(GameModel existingGame, GameRequest gameRequest){
+    private GameModel updateFieldsGame(GameModel existingGame, GameRequest gameRequest) {
         existingGame.setName(gameRequest.getName());
         return existingGame;
     }
 
     @Override
-    public void deleteGame(Long gameId) {
-        Optional.of(gameId)
-                .map(this::getGame)
-                .ifPresent(gameRepository::delete);
+    public void deleteGame(String userId, Long gameId) {
+        gameRepository.findGameByUserIdAndGameId(userId, gameId)
+                .ifPresentOrElse(gameRepository::delete, () -> {
+                    throw new RuntimeException("Error deleting game");
+                });
     }
 
-    private GameModel mapToEntity(GameRequest gameRequest) {
-        return GameModel.builder().name(gameRequest.getName()).build();
+
+    private GameModel mapToEntity(GameRequest gameRequest, String userId) {
+        return GameModel.builder().name(gameRequest.getName())
+                .userId(userId)
+                .build();
     }
 }

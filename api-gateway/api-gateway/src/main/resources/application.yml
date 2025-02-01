@@ -17,7 +17,7 @@ spring:
           predicates:
             - Path=/v1/game/**
           filters:
-            - name: AuthenticationFilter
+            - AuthenticationFilter
   endpoints:
     web:
       exposure:

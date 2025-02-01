@@ -4,8 +4,8 @@ import com.example.games_service_api.common.entities.models.GameModel;
 import com.example.games_service_api.common.entities.models.dtos.GameRequest;
 
 public interface IGameService {
-    GameModel createGame(GameRequest gameRequest);
-    GameModel getGame(Long gameId);
-    void updateGame(GameRequest gameRequest, Long gameId);
-    void deleteGame(Long gameId);
+    GameModel createGame(GameRequest gameRequest, String userId);
+    GameModel getGame(String userId, Long gameId);
+    void updateGame(GameRequest gameRequest, String userId, Long gameId);
+    void deleteGame(String userId, Long gameId);
 }

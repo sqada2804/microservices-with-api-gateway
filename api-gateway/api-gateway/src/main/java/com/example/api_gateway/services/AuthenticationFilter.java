@@ -15,7 +15,6 @@ import reactor.core.publisher.Mono;
 @Component
 public class AuthenticationFilter extends AbstractGatewayFilterFactory<AuthenticationFilter.Config> {
 
-    private static final Logger log = LogManager.getLogger(AuthenticationFilter.class);
     private final RouterValidator validator;
     private final JwtUtils jwtUtils;
 
