@@ -1,6 +1,5 @@
 package com.example.users_service_api.controllers.Implementation;
 
-
 import com.example.common_library.entity.UserModel;
 import com.example.users_service_api.controllers.Interface.IUserController;
 import com.example.users_service_api.commons.dtos.UpdateInfoRequest;
@@ -17,20 +16,20 @@ public class UserController implements IUserController {
         this.userService = userService;
     }
 
+
     @Override
-    public ResponseEntity<Void> updateUser(UpdateInfoRequest userModel, Long userId, String userIdAuth) {
-        userService.updateUser(userModel, userId);
+    public ResponseEntity<Void> updateUser(UpdateInfoRequest userModel, String userId) {
+        userService.updateUser(userModel,userId);
         return ResponseEntity.noContent().build();
 
     }
-
     @Override
-    public ResponseEntity<UserModel> getUser(Long userId, String userIdAuth) {
+    public ResponseEntity<UserModel> getUser(String userId) {
         return ResponseEntity.ok(userService.getUser(userId));
     }
 
     @Override
-    public ResponseEntity<Void> deleteUser(Long userId, String userIdAuth) {
+    public ResponseEntity<Void> deleteUser(String userId) {
         userService.deleteUser(userId);
         return ResponseEntity.noContent().build();
     }

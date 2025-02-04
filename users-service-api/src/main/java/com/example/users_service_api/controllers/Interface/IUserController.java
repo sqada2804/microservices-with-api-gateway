@@ -11,20 +11,19 @@ import org.springframework.web.bind.annotation.*;
 @SecurityRequirement(name = "Bearer Authentication")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public interface IUserController {
-        @GetMapping(value = "/getUser")
+        @GetMapping(value = "/get")
         ResponseEntity<UserModel> getUser(
-                @PathVariable("userId") Long userId,
-                @RequestHeader("X-User-Id") String userIdAuth);
-
-        @PutMapping(value = "/updateUser")
-        ResponseEntity<Void> updateUser(
-                @RequestBody UpdateInfoRequest userRequest,
-                @PathVariable("userId") Long userId,
-                @RequestHeader("X-User-Id") String userIdAuth
+                @RequestHeader("X-User-Id") String userId
         );
 
-        @DeleteMapping(value = "/deleteUser")
+        @PutMapping(value = "/update")
+        ResponseEntity<Void> updateUser(
+                @RequestBody UpdateInfoRequest userRequest,
+                @RequestHeader("X-User-Id") String userId
+        );
+
+        @DeleteMapping(value = "/delete")
         ResponseEntity<Void> deleteUser(
-                @PathVariable("userId") Long userId,
-                @RequestHeader("X-User-Id") String userIdAuth);
+                @RequestHeader("X-User-Id") String userId
+        );
 }

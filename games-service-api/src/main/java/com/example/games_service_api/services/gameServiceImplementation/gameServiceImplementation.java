@@ -28,7 +28,7 @@ public class gameServiceImplementation implements IGameService {
 
     @Override
     public GameModel getGame(String userId, Long gameId) {
-        return Optional.of(userId).flatMap(userId1 -> gameRepository.findGameByUserIdAndGameId(userId, gameId))
+        return Optional.of(userId).flatMap(userId1 -> gameRepository.findGameByUserIdAndGameId(userId1, gameId))
                 .orElseThrow(() -> new RuntimeException("Error finding game by id"));
     }
 
@@ -37,7 +37,6 @@ public class gameServiceImplementation implements IGameService {
     public void updateGame(GameRequest gameRequest, String userId, Long gameId) {
         gameRepository.findGameByUserIdAndGameId(userId, gameId)
                 .map(gameExists -> {
-                    System.out.println("Game found: " + gameExists);
                     return updateFieldsGame(gameExists, gameRequest);
                 })
                 .map(gameRepository::save)

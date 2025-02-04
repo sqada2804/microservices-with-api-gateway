@@ -17,13 +17,14 @@ public class UserServiceImpl implements IUserService {
         this.userRepository = userRepository;
     }
 
+
     @Override
-    public void updateUser(UpdateInfoRequest userRequest, Long userId) {
-        Optional.of(userId)
-                .map(this::getUser)
-                .map(existingUser -> updateFieldsUser(existingUser, userRequest))
-                .map(userRepository::save)
-                .orElseThrow(() -> new RuntimeException("Couldn´t update user"));
+    public void updateUser(UpdateInfoRequest userRequest, String userId) {
+            userRepository.findById(Long.valueOf(userId))
+                    .map(userExists -> {
+                        return updateFieldsUser(userExists, userRequest);
+                    }).map(userRepository::save)
+                    .orElseThrow(() -> new RuntimeException("Error updating User"));
     }
 
     private UserModel updateFieldsUser(UserModel existingUser, UpdateInfoRequest userModel) {
@@ -33,14 +34,15 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public void deleteUser(Long userId) {
-        Optional.of(userId).map(this::getUser)
-                .ifPresent(userRepository::delete);
+    public void deleteUser(String userId) {
+        userRepository.findById(Long.valueOf(userId)).ifPresentOrElse(userRepository::delete, () -> {
+            throw new RuntimeException("Error deleting User");
+        });
     }
 
     @Override
-    public UserModel getUser(Long userId) {
-        return Optional.of(userId).flatMap(userRepository::findById)
-                .orElseThrow(() -> new RuntimeException("Error finding by id"));
+    public UserModel getUser(String userId) {
+        return Optional.of(Long.valueOf(userId)).flatMap(userRepository::findByUserId)
+                .orElseThrow(() -> new RuntimeException("Error getting the User"));
     }
 }
