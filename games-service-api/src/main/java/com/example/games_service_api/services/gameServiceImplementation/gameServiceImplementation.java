@@ -36,9 +36,7 @@ public class gameServiceImplementation implements IGameService {
     @Override
     public void updateGame(GameRequest gameRequest, String userId, Long gameId) {
         gameRepository.findGameByUserIdAndGameId(userId, gameId)
-                .map(gameExists -> {
-                    return updateFieldsGame(gameExists, gameRequest);
-                })
+                .map(gameExists -> updateFieldsGame(gameExists, gameRequest))
                 .map(gameRepository::save)
                 .orElseThrow(() -> new RuntimeException("Error updating Game Fields"));
     }
@@ -55,7 +53,6 @@ public class gameServiceImplementation implements IGameService {
                     throw new RuntimeException("Error deleting game");
                 });
     }
-
 
     private GameModel mapToEntity(GameRequest gameRequest, String userId) {
         return GameModel.builder().name(gameRequest.getName())
